@@ -1,0 +1,448 @@
+Q-3.1
+
+
+
+
+Animals folder  animal.java
+
+
+package Animals;
+
+public class animal {
+    private String name;
+    
+    public animal(String name) {
+        this.name = name;
+    }
+    
+    public void makeSound() {
+        System.out.println(name + " makes a sound");
+    }
+    
+    public String getName() {
+        return name;
+    }
+}
+
+
+
+demo folder  Main.java
+
+
+
+
+package demo;
+
+import Animals.animal;
+
+public class Main {
+    public static void main(String[] args) {
+    
+        animal dog = new animal("Dog");
+        animal cat = new animal("Cat");
+        
+        dog.makeSound();   
+        cat.makeSound();  
+        
+        System.out.println("Animal name: " + dog.getName());
+    }
+}
+
+
+
+run main.java
+
+
+
+
+
+
+
+Q-3.2
+
+
+
+public class p1 {
+
+    public void test() {
+        System.out.println("Test method with no parameters called.");
+    }
+
+    public void test(int a) {
+        System.out.println("Test method with one integer parameter: " + a);
+    }
+
+    public void test(int a, int b) {
+        System.out.println("Test method with two integer parameters: " + a + " and " + b);
+    }
+
+    public void test(double d) {
+        System.out.println("Test method with one double parameter: " + d);
+    }
+
+    public static void main(String[] args) {
+        p1 demo = new p1();
+        demo.test();           
+        demo.test(5);         
+        demo.test(5, 10);      
+        demo.test(3.14);      
+    }
+}
+
+
+
+
+Q-3.3
+
+
+
+public class p2 {
+    private double radius;
+
+    public p2() {
+        this.radius = 1.0;
+    }
+
+    public p2(double radius) {
+        this.radius = radius;
+    }
+
+    public void calcArea() {
+        double area = Math.PI * radius * radius;
+        System.out.println("Area of the circle with radius " + radius + " is: " + area);
+    }
+
+    public static void main(String[] args) {
+        p2 circle1 = new p2();
+        circle1.calcArea();
+        p2 circle2 = new p2(5.0);
+        circle2.calcArea();
+    }
+}
+
+
+
+
+Q-3.4
+
+
+
+
+public class p3 {
+    private double x;
+    private double y;
+    private double z;
+
+    public p3(double a) {
+        this.x = a;
+        this.y = a;
+        this.z = a;
+        printCoordinates();
+    }
+
+    public p3(double a, double b) {
+        this.x = a;
+        this.y = b;
+        this.z = 0;
+        printCoordinates();
+    }
+
+    public p3(double a, double b, double c) {
+        this.x = a;
+        this.y = b;
+        this.z = c;
+        printCoordinates();
+    }
+
+    private void printCoordinates() {
+        System.out.println("Point3D coordinates: x = " + x + ", y = " + y + ", z = " + z);
+    }
+
+    public static void main(String[] args) {
+        new p3(5.5);
+        new p3(3.2, 4.8);
+        new p3(1.1, 2.2, 3.3);
+    }
+}
+
+
+
+
+Q-3.5
+
+
+
+
+
+class Animal {
+    public void sound() {
+        System.out.println("Animal makes a generic sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    public void sound() {
+        System.out.println("Dog barks: Woof Woof!");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    public void sound() {
+        System.out.println("Cat meows: Meow Meow!");
+    }
+}
+
+public class p9 {
+    public static void main(String[] args) {
+        Animal animal = new Animal();
+        Dog dog = new Dog();
+        Cat cat = new Cat();
+        
+        animal.sound();       
+        dog.sound();           
+        cat.sound();          
+    
+        System.out.println("\n--- Polymorphism ---");
+        Animal[] animals = {new Dog(), new Cat(), new Animal()};
+        for (Animal a : animals) {
+            a.sound();        
+        }
+    }
+}
+
+
+
+
+Q-3.6
+
+
+
+
+
+interface Drawable {
+    void draw();          
+    default void message() { 
+        System.out.println("Drawing from interface");
+    }
+}
+
+interface Resizable {
+    void resize(int width, int height);
+}
+
+class Circle implements Drawable {
+    @Override
+    public void draw() {
+        System.out.println("Drawing a Circle");
+    }
+}
+
+class Rectangle implements Drawable, Resizable {
+    @Override
+    public void draw() {
+        System.out.println("Drawing a Rectangle");
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        System.out.println("Resizing rectangle to " + width + "x" + height);
+    }
+}
+
+public class p8 {
+    public static void main(String[] args) {
+        Drawable d1 = new Circle();
+        Drawable d2 = new Rectangle();
+        
+        d1.draw();      
+        d2.draw();     
+        d2.message();   
+
+        Resizable r = new Rectangle();
+        r.resize(100, 50);
+        
+        Drawable[] shapes = {new Circle(), new Rectangle()};
+        for (Drawable shape : shapes) {
+            shape.draw();
+        }
+    }
+}
+
+
+
+
+
+Q-3.7
+
+
+
+
+
+abstract class Shape {
+    abstract void numberOfSides();
+}
+
+class Trapezoid extends Shape {
+    @Override
+    void numberOfSides() {
+        System.out.println("Trapezoid has 4 sides");
+    }
+}
+
+class Triangle extends Shape {
+    @Override
+    void numberOfSides() {
+        System.out.println("Triangle has 3 sides");
+    }
+}
+
+class Hexagon extends Shape {
+    @Override
+    void numberOfSides() {
+        System.out.println("Hexagon has 6 sides");
+    }
+}
+
+public class p5 {
+    public static void main(String[] args) {
+        Shape t = new Trapezoid();
+        Shape tri = new Triangle();
+        Shape h = new Hexagon();
+
+        t.numberOfSides();
+        tri.numberOfSides();
+        h.numberOfSides();
+    }
+}
+
+
+
+
+Q-3.8
+
+
+
+
+
+interface Printable {
+    void print();
+}
+
+interface Showable {
+    void show();
+}
+
+class Demo implements Printable, Showable {
+    @Override
+    public void print() {
+        System.out.println("Printing from Printable interface");
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Showing from Showable interface");
+    }
+}
+
+public class p6 {
+    public static void main(String[] args) {
+        Demo d = new Demo();
+        d.print();
+        d.show();
+    }
+}
+
+
+
+
+Q-3.9
+
+
+
+
+
+class Product {
+    private String name;
+    private String productCode;
+    private String manufacturer;
+
+    public Product() {
+        this.name = "Unknown";
+        this.productCode = "N/A";
+        this.manufacturer = "Unknown";
+    }
+
+    public Product(String name) {
+        this.name = name;
+        this.productCode = "N/A";
+        this.manufacturer = "Unknown";
+    }
+
+    public Product(String name, String productCode, String manufacturer) {
+        this.name = name;
+        this.productCode = productCode;
+        this.manufacturer = manufacturer;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public void display() {
+        System.out.println("Product Name: " + name);
+        System.out.println("Product Code: " + productCode);
+        System.out.println("Manufacturer: " + manufacturer);
+        System.out.println("-------------------");
+    }
+}
+
+public class p7 {
+    public static void main(String[] args) {
+        System.out.println("1. Testing default constructor:");
+        Product p1 = new Product();
+        p1.display();
+
+        System.out.println("2. Testing constructor with name only:");
+        Product p2 = new Product("Laptop");
+        p2.display();
+
+        System.out.println("3. Testing full constructor:");
+        Product p3 = new Product("iPhone 15", "IP15", "Apple");
+        p3.display();
+
+        System.out.println("4. Testing setter methods:");
+        p3.setName("iPhone 15 Pro");
+        p3.setProductCode("IP15P");
+        p3.setManufacturer("Apple Inc.");
+        p3.display();
+
+        System.out.println("5. Testing getter methods:");
+        System.out.println("Name: " + p3.getName());
+        System.out.println("Code: " + p3.getProductCode());
+        System.out.println("Manufacturer: " + p3.getManufacturer());
+    }
+}
+
+
